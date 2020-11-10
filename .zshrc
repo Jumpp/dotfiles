@@ -10,8 +10,7 @@ export ZSH="/home/juuso/.oh-my-zsh"
     # Activate vim mode.
     bindkey -v
 
-    # Remove mode switching delay.
-    KEYTIMEOUT=5
+export KEYTIMEOUT=5
 
 # Use beam shape cursor for each new prompt.
 # preexec() {
@@ -96,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
  fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -114,13 +113,23 @@ source $ZSH/oh-my-zsh.sh
 
 # basic shortened commands
 alias node='/usr/bin/node'
+alias please='sudo'
 
 alias q='exit'
 
 # apps
 alias o="xdg-open"
 alias c='code'
-alias e='emacsclient --no-wait'
-alias doom='~/.emacs.d/bin/doom'
-alias ufetch='~/bin/ufetch'
+alias nvpn='sudo systemctl start nordvpnd'
+alias e='emacs'
+alias stripe='~/apps/stripe'
 alias cat='bat'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/juuso/packages/google-cloud-sdk/path.zsh.inc' ]; then . '/home/juuso/packages/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/juuso/packages/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/juuso/packages/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export PATH=~/.emacs.d/bin:$PATH
