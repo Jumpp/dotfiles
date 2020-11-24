@@ -1,0 +1,67 @@
+# Colors (Material Theme)
+colors:
+  # Default colors
+  primary:
+    background: "#263238"
+    foreground: "#FFFFFF"
+
+  # Normal colors
+  normal:
+    black: "0x666666"
+    red: "#f36c60"
+    green: "#8bc34a"
+    yellow: "#fff59d"
+    blue: "#4dd0e1"
+    magenta: "0xff2f90"
+    cyan: "0xaeddff"
+    white: "#FFFFFF"
+
+  # Bright colors
+  bright:
+    black: "0x666666"
+    red: "#f36c60"
+    green: "#8bc34a"
+    yellow: "#fff59d"
+    blue: "#4dd0e1"
+    magenta: "0xff2f90"
+    cyan: "0xaeddff"
+    white: "#FFFFFF"
+key_bindings:
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
+background_opacity: 0.95
+window:
+  padding:
+    x: 3
+    y: 1
+  #dynamic_padding: true
+# Font configuration (changes require restart)
+font:
+  # The size to use.
+  size: 10
+  # The normal (roman) font face to use.
+  normal:
+    family: Source Code Pro
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: Source Code Pro
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: Source Code Pro
+    # Style can be specified to pick a specific face.
+    style: Italic
+
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  # TERM: alacritty
+  WINIT_X11_SCALE_FACTOR: "1"
