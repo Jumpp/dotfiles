@@ -3,10 +3,16 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/juuso/.oh-my-zsh"
+source "$HOME/apps/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 
     # vim mode config
     # ---------------
-
+MODE_CURSOR_VIINS="#8bc34a steady bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
+MODE_CURSOR_VICMD="#ff9800 block"
+MODE_CURSOR_SEARCH="#ff00ff steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
     # Activate vim mode.
     bindkey -v
 
@@ -76,7 +82,20 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zsh-syntax-highlighting
-plugins=(git vi-mode zsh-autosuggestions common-aliases fasd z )
+plugins=(
+    git
+    yarn
+    node
+    web-search
+    jsontools
+    docker
+    vi-mode
+    zsh-autosuggestions
+    common-aliases
+    fasd
+    z
+    zsh-aliases-exa
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,9 +140,11 @@ alias q='exit'
 alias o="xdg-open"
 alias c='code'
 alias nvpn='sudo systemctl start nordvpnd'
-alias e='emacs'
+alias e='emacsclient'
 alias stripe='~/apps/stripe'
 alias cat='bat'
+# jankyyy
+alias ufetch='/home/juuso/apps/ufetch/ufetch-manjaro'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/juuso/packages/google-cloud-sdk/path.zsh.inc' ]; then . '/home/juuso/packages/google-cloud-sdk/path.zsh.inc'; fi
