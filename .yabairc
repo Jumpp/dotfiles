@@ -1,0 +1,68 @@
+#!/usr/bin/env sh
+
+# global settings
+yabai -m config                                 \
+    external_bar                 off:40:0       \
+    menubar_opacity              1.0            \
+    mouse_follows_focus          off            \
+    focus_follows_mouse          off            \
+    display_arrangement_order    default        \
+    window_origin_display        default        \
+    window_placement             second_child   \
+    window_zoom_persist          on             \
+    window_shadow                on             \
+    window_animation_duration    0.0            \
+    window_animation_easing      ease_out_circ  \
+    window_opacity_duration      0.0            \
+    active_window_opacity        1.0            \
+    normal_window_opacity        0.90           \
+    window_opacity               off            \
+    insert_feedback_color        0xffd75f5f     \
+    split_ratio                  0.40           \
+    split_type                   auto           \
+    auto_balance                 off            \
+    top_padding                  0             \
+    bottom_padding               0             \
+    left_padding                 0             \
+    right_padding                0             \
+    window_gap                   5             \
+    layout                       bsp            \
+    mouse_modifier               fn             \
+    mouse_action1                move           \
+    mouse_action2                resize         \
+    mouse_drop_action            swap
+
+
+# yabai -m config window_border off ??
+
+# float certain programs
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add title="^references$" manage=off
+yabai -m rule --add title="^Settings$" manage=off
+yabai -m rule --add title="^Maccy$" manage=off
+
+## SPACES ##
+yabai -m space 1 --label main
+yabai -m rule --add app="Chrome" space=main
+yabai -m rule --add app="Brave" space=main
+yabai -m rule --add app="code" space=main
+
+yabai -m space 2 --label term
+yabai -m rule --add app="iTerm" space=term
+yabai -m rule --add app="Terminal" space=term
+yabai -m rule --add app="Docker desktop" space=term
+
+yabai -m space 3 --label chat
+yabai -m rule --add app="Microsoft Teams" space=chat
+yabai -m rule --add app="Slack" space=chat
+
+yabai -m space 4 --label misc
+yabai -m rule --add app="Microsoft Outlook" space=misc
+yabai -m rule --add app="Postman" space=misc
+
+yabai -m space 5 --label personal
+yabai -m rule --add app="Firefox" space=personal  
+yabai -m rule --add app="Spotify" space=personal
+
+echo "yabai configuration loaded.."
