@@ -1,0 +1,32 @@
+
+font="JetBrainsMono"
+width=360
+margin=24
+padding=15
+anchor=top-right
+max-visible=5
+default-timeout=5000
+
+# Base opacity and border
+background-color=#151419FF
+border-color=#666666A6
+border-size=1
+text-color=#ffffff
+
+# Styles by urgency
+[urgency=low]
+default-timeout=5000
+
+[urgency=normal]
+default-timeout=6000
+
+[urgency=critical]
+# 0 = persist until dismissed (mako treats 0 as never timeout)
+default-timeout=0
+background-color=#a54242E6
+border-color=#000000
+border-size=1
+text-color=#ffffff
+
+# Small icon size
+max-icon-size=32

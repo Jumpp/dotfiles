@@ -1,0 +1,38 @@
+image=/home/juuso/Pictures/backgrounds/bg7.png
+scaling=fill
+
+# Show clock
+clock
+datestr=%Y-%m-%d
+timestr=%H:%M
+
+# Indicator appearance
+indicator
+indicator-radius=100
+indicator-thickness=10
+font=sans-serif
+font-size=24
+
+# Colors - using aa0000 (dark red) to match your idle config
+color=aa0000ff
+inside-color=00000088
+ring-color=aaaaaaaa
+line-color=00000000
+text-color=ffffffff
+text-clear-color=ffffffff
+text-ver-color=ffffffff
+text-wrong-color=ff0000ff
+bs-hl-color=ff0000ff
+key-hl-color=00ff00ff
+
+# When clearing
+inside-clear-color=0000ff88
+ring-clear-color=aaaaff88
+
+# When verifying
+inside-ver-color=ffff0088
+ring-ver-color=ffffaa88
+
+# When wrong password
+inside-wrong-color=ff000088
+ring-wrong-color=ff000088

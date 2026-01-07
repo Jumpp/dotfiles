@@ -1,0 +1,291 @@
+# Default config for sway
+# `man 5 sway` for a complete reference.
+
+### Variables
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Your preferred terminal emulator
+set $term foot
+
+# Applications
+set $browser chromium-browser
+set $editor code
+set $files thunar
+set $firefox firefox
+set $slack flatpak run com.slack.Slack
+set $teams teams-for-linux
+set $spotify flatpak run com.spotify.Client
+set $outlook chromium-browser --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn
+set $podman flatpak run io.podman_desktop.PodmanDesktop
+set $podman podman-desktop
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+# Expand $term here so the terminal variable is used by rofi
+set $rofi_cmd rofi -terminal $term
+# Shows a combined list of the applications with desktop files and
+# executables from PATH.
+# TODO: add window with the next release of rofi-wayland
+set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+
+### Input configuration
+input * {
+    xkb_layout "fi"
+    xkb_variant "nodeadkeys"
+    xkb_options "lv3:ralt_switch"
+}
+
+### Background
+output * bg ~/Pictures/backgrounds/bg7.png fill
+
+### Idle configuration
+exec swayidle -w \
+         timeout 900 'swaylock -f -c aa0000' \
+         timeout 1800 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c aa0000'
+
+### Key bindings
+
+# Basics:
+#
+    # keybinds
+    bindsym $mod+t exec $term
+    bindsym $mod+i exec $firefox
+    bindsym $mod+c exec $editor
+    bindsym $mod+f exec $files
+    bindsym $mod+s exec $slack
+    bindsym $mod+o exec $outlook
+
+    # floating rules
+    for_window [app_id="qalculate"] floating enable
+    for_window [window_type="dialog"] floating enable
+    for_window [window_role="dialog"] floating enable
+    for_window [app_id="org.kde.xwaylandvideobridge"] floating enable, move scratchpad
+
+    # GlobalProtect always on top
+    for_window [app_id="PanGPUI"] floating enable, sticky enable
+
+    # Kill focused window (ctrl + q)
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+Space exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Gaps: add spacing between tiled windows and screen edges (e.g. waybar)
+    # bindsym $mod+p exec /home/juuso/dotfiles/.local/bin/toggle-gaps
+
+    # Adjust values to taste (pixels)
+    gaps inner 8
+    gaps outer 4
+    smart_gaps off
+    # print screen utility (moved to Mod+Shift+p)
+    bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
+
+    # Exit sway (logs you out of your Wayland session)
+    # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+     bindsym $mod+shift+e exec /home/juuso/dotfiles/scripts/power-menu.sh
+
+#
+# moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+
+    # start daemons 
+    exec mako # notification daemon
+    exec_always kanshi # monitor layout manager
+    
+    # Screen sharing support
+    exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+    exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    exec /usr/libexec/xdg-desktop-portal-wlr
+
+    set  $ws1 "1"
+    assign [class="Chromium-browser"] $ws1
+    # assign [class="Code"] $ws1
+    set $ws2 "2"
+    assign [app_id="io.podman_desktop.PodmanDesktop"] $ws2
+    set $ws3 "3"
+    assign [class="Slack"] $ws3
+    assign [class="teams-for-linux"] $ws3
+    assign [app_id="chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default"] $ws3
+    set $ws4 "4"
+    assign [app_id="org.mozilla.firefox"] $ws4
+    set $ws5 "5"
+    assign [class="Spotify"] $ws5
+    set $ws6 "6"
+
+
+    # workspace $ws4
+    #     exec $firefox
+    # workspace $ws3
+    #     exec $slack
+    #     exec $teams
+    #     exec $outlook
+    # workspace $ws2
+    #     exec $term
+    #     exec $podman
+    # workspace $ws1
+    #     exec $browser
+    #     exec $editor
+    # workspace $ws5
+    #     exec $spotify
+
+
+    # Switch to workspace
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $ws1 
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+
+
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    # bindsym $mod+b splith
+    # bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout stacking
+
+    bindsym $mod+Shift+t layout tabbed
+    bindsym $mod+Shift+s toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+m fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+n floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    # bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+minus move scratchpad
+
+    # Show scratchpad menu with rofi to select which window to bring back
+    bindsym $mod+plus exec /home/juuso/dotfiles/scripts/scratchpad-menu.sh
+#
+# Resizing containers:
+#
+    bindsym {
+        $mod+ctrl+h resize shrink width 5 ppt
+        $mod+ctrl+j resize grow height 5 ppt
+        $mod+ctrl+k resize shrink height 5 ppt
+        $mod+ctrl+l resize grow width 5 ppt
+    }
+
+default_border pixel 1
+default_floating_border pixel 2
+
+smart_borders on
+
+input * {
+    # finnish layout
+    xkb_layout fi
+    # esc => caps
+    xkb_options caps:escape
+}
+
+# Touchpad-specific settings (scope to touchpad devices only)
+input type:touchpad {
+    tap enabled
+    tap_button_map lrm
+    click_method clickfinger
+    dwt enabled
+    natural_scroll enabled
+}
+
+#touchpad gesture
+bindgesture swipe:right workspace next
+bindgesture swipe:left workspace prev
+
+# toggle screen flip
+bindsym $mod+aring exec swaymsg output eDP-1 enable && ~/.local/bin/screen-flip
+
+# clipboard manager
+ exec wl-paste --watch cliphist store
+ bindsym $mod+v exec cliphist list | head -n 200 | rofi -dmenu -i -sorting-method fzf | cliphist decode | wl-copy
+
+# Include configs from 3 locations:
+#  - /usr/share/sway/config.d
+#  - /etc/sway/config.d
+#  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
+#
+# If multiple directories contain the files with the same name, the later
+# directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
+# will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
+# or `/etc/sway/config.d/20-swayidle.conf`
+#
+# This mechanism permits overriding our default configuration per-system
+# (/etc) or per-user ($XDG_CONFIG_HOME) basis. Just create the file you
+# want to modify/override in the higher-level directory.
+#
+# For example, to disable the default bar from Fedora configs, you'll need to
+#     $ echo -n > "$HOME/.config/sway/config.d/90-bar.conf"
+#
+# Note the quoting, the $() and the arguments quoting. All the parts are equally
+# important to make the magic work. And if you want to learn the secret behind
+# the trick, it's all in the `wordexp(3)`.
+#
+
+include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
+

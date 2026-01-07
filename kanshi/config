@@ -1,0 +1,18 @@
+profile desk {
+	output HDMI-A-1 enable mode 3440x1440 scale 1
+	output eDP-1 disable
+}
+
+profile desk-dongle {
+	output DP-1 enable mode 3440x1440 scale 1
+	output eDP-1 disable
+}
+profile laptop {
+	output eDP-1 enable scale 1.7
+}
+
+# Catch-all for unknown monitor configurations
+profile fallback {
+	output * enable
+	exec notify-send -u critical "Unknown Monitor Detected" "$(swaymsg -t get_outputs | grep -E '(Output|Current mode)' | head -20)"
+}
