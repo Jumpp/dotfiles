@@ -1,0 +1,127 @@
+configuration {
+    modi: "combi,drun,run";
+    combi-modi: "drun,run";
+    font: "JetBrainsMono 12";
+    show-icons: false;
+    drun-display-format: "{name}";
+    sidebar-mode: false;
+    disable-history: false;
+}
+
+* {
+    bg: #151419FF;
+    bg-input: #000000;
+    bg-selected: #53535FFF;
+    fg: #ffffff;
+    fg-alt: #666666;
+    
+    border: #666666A6;
+    urgent: #a54242;
+    
+    background-color: transparent;
+    text-color: @fg;
+    font: "JetBrainsMono 12";
+}
+
+window {
+    transparency: "real";
+    background-color: @bg;
+    border: 1px;
+    border-color: @border;
+    border-radius: 0px;
+    width: 660px;
+    padding: 20px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, listview];
+    spacing: 12px;
+}
+
+inputbar {
+    background-color: @bg-input;
+    text-color: @fg;
+    border: 0px;
+    border-radius: 4px;
+    padding: 10px;
+    children: [entry];
+}
+
+prompt {
+    // background-color: transparent;
+//    text-color: @bg;
+    padding: 0px 10px 0px 0px;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 8;
+    spacing: 5px;
+    cycle: false;
+    dynamic: true;
+    layout: vertical;
+    border: 0px;
+    scrollbar: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    orientation: horizontal;
+    border-radius: 0px;
+    padding: 5px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    expand: true;
+    horizontal-align: 0;
+    vertical-align: 0.5;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @fg;
+    border-radius: 4px;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element normal.urgent {
+    background-color: @urgent;
+    text-color: @fg;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @fg;
+}
+
+element normal.active {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.active {
+    background-color: @bg-selected;
+    text-color: @fg;
+    border-radius: 4px;
+}

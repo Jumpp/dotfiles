@@ -1,0 +1,190 @@
+[include]
+	path = ~/.gitconfig.local
+
+# GLOBAL CONFIGURATION
+[push]
+	autoSetupRemote = true
+[alias]
+	# === Sync & Update ===
+	# Pull with rebase and auto-stash - perfect for syncing your branch
+	sync = pull --rebase --autostash
+	
+	# Sync main/master branch specifically
+	sync-main = "!git checkout main && git pull --rebase --autostash || git checkout master && git pull --rebase --autostash"
+	
+	# Rebase current branch with latest main (stash, update main, rebase)
+	rebase-main = "!f() { CURRENT=$(git rev-parse --abbrev-ref HEAD); git add . && git stash && git checkout main && git pull --rebase --autostash && git checkout \"$CURRENT\" && git rebase main && git stash pop; }; f"
+	
+	# Update all branches from remote
+	update = fetch --all --prune
+	
+	# === Stashing ===
+	# Quick save with message
+	save = stash push -u -m
+	
+	# Quick stash everything including untracked
+	stash-all = stash push -u
+	
+	# Apply most recent stash
+	pop = stash pop
+	
+	# List stashes with details
+	stashes = stash list
+	
+	# === Status & Info ===
+	# Short status
+	s = status -sb
+	
+	# Full status
+	st = status
+	
+	# Show branches with last commit info
+	branches = branch -vv
+	
+	# Show all branches including remotes
+	br = branch -a
+	
+	# === Committing ===
+	# Quick commit
+	c = commit
+	
+	# Commit with message
+	cm = commit -m
+	
+	# Amend last commit
+	amend = commit --amend
+	
+	# Amend without editing message
+	amend-ne = commit --amend --no-edit
+	
+	# === Logging ===
+	# Pretty one-line log
+	l = log --oneline --graph --decorate
+	
+	# Detailed log with stats
+	ll = log --stat --abbrev-commit
+	
+	# Show last commit
+	last = log -1 HEAD --stat
+	
+	# Log with dates
+	ld = log --pretty=format:'%C(yellow)%h %C(cyan)%ad %C(reset)%s%C(green)%d %C(blue)<%an>' --date=short --graph
+	
+	# === Diff ===
+	# Show diff of staged changes
+	d = diff
+	
+	# Show diff of what's staged
+	dc = diff --cached
+	
+	# Show diff with word-level changes
+	dw = diff --word-diff
+	
+	# === Reset & Undo ===
+	# Unstage files
+	unstage = reset HEAD --
+	
+	# Undo last commit but keep changes
+	undo = reset --soft HEAD~1
+	
+	# Hard reset to last commit (DANGER: loses changes)
+	reset-hard = reset --hard HEAD
+	
+	# Discard changes in working directory
+	discard = checkout --
+	
+	# === Remote ===
+	# Push current branch
+	p = push
+	
+	# Force push with lease (safer than force)
+	pf = push --force-with-lease
+	
+	# Pull current branch
+	pl = pull
+	
+	# Show remotes with URLs
+	remotes = remote -v
+	
+	# === Branching ===
+	# Checkout branch
+	co = checkout
+	
+	# Create and checkout new branch
+	cob = checkout -b
+	
+	# Switch to previous branch
+	back = checkout -
+	
+	# Delete branch
+	del = branch -d
+	
+	# Force delete branch
+	del-force = branch -D
+	
+	# === Utilities ===
+	# Show contributors
+	contributors = shortlog -sn
+	
+	# Show files ignored by git
+	ignored = ls-files --others --ignored --exclude-standard
+	
+	# Find branches containing commit
+	find-branch = "!f() { git branch -a --contains $1; }; f"
+	
+	# Show current branch name
+	current = rev-parse --abbrev-ref HEAD
+	
+	# Clean up merged branches (except main/master)
+	cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d"
+
+[core]
+	# Use nvim as default editor
+	editor = nvim
+	
+	# Automatically convert line endings
+	autocrlf = input
+
+[pull]
+	# Use rebase by default when pulling
+	rebase = true
+
+[push]
+	# Push current branch to upstream
+	default = current
+	
+	# Automatically set up tracking
+	autoSetupRemote = true
+
+[rebase]
+	# Automatically stash before rebase
+	autoStash = true
+	
+	# Auto-squash commits marked with fixup!/squash!
+	autoSquash = true
+
+[fetch]
+	# Automatically prune deleted remote branches
+	prune = true
+
+[diff]
+	# Use better diff algorithm
+	algorithm = histogram
+	
+	# Show moved lines differently
+	colorMoved = default
+
+[merge]
+	# Include summaries of merged commits
+	log = true
+	
+	# Use diff3 conflict style (shows common ancestor)
+	conflictStyle = diff3
+
+[color]
+	# Enable colors in output
+	ui = auto
+
+[init]
+	# Default branch name for new repos
+	defaultBranch = main
