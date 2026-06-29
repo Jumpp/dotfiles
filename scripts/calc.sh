@@ -13,9 +13,11 @@ while true; do
     # Exit if empty or cancelled
     [ -z "$expression" ] && break
     
-    # Skip if selecting from history
-    [[ "$expression" == *"="* ]] && continue
-    
+    # If selecting from history, extract the expression part (before " = ")
+    if [[ "$expression" == *" = "* ]]; then
+        expression="${expression%% = *}"
+    fi
+
     # Calculate result
     result=$(qalc "$expression" 2>&1 | grep -E "^[^>]" | tail -n 1)
     

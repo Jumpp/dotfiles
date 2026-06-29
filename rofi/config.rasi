@@ -49,9 +49,8 @@ inputbar {
 }
 
 prompt {
-    // background-color: transparent;
-//    text-color: @bg;
-    padding: 0px 10px 0px 0px;
+   text-color: @fg;
+   padding: 0px 10px 0px 0px;
 }
 
 entry {
@@ -124,4 +123,10 @@ element selected.active {
     background-color: @bg-selected;
     text-color: @fg;
     border-radius: 4px;
+}
+
+error-message {
+    background-color: @bg;
+    text-color: @fg;
+    padding: 10px;
 }

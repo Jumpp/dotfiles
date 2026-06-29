@@ -13,6 +13,7 @@ launch_if_not_running() {
     
     if ! is_running "$process_name"; then
         swaymsg "workspace $workspace; exec $command"
+        # swaymsg "exec $command"
     fi
 }
 
@@ -25,7 +26,7 @@ launch_if_not_running "slack" "3" "flatpak run com.slack.Slack"
 launch_if_not_running "teams-for-linux" "3" "teams-for-linux"
 # Outlook web app as Chrome PWA - requires specific process check
 if ! pgrep -f "chrome-faolnafnngnfdaknnbpnkhgohbobgegn" > /dev/null 2>&1; then
-    swaymsg "workspace 3; exec chromium-browser --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn"
+    swaymsg "exec chromium-browser --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn"
 fi
-launch_if_not_running "firefox" "4" "firefox"
-launch_if_not_running "spotify" "5" "flatpak run com.spotify.Client"
+# launch_if_not_running "firefox" "4" "firefox"
+# launch_if_not_running "spotify" "5" "flatpak run com.spotify.Client"

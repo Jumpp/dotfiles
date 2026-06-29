@@ -42,7 +42,6 @@ safe_link "$PWD/kanshi"    "$HOME/.config/kanshi"
 safe_link "$PWD/nvim"     "$HOME/.config/nvim"
 safe_link "$PWD/rofi"     "$HOME/.config/rofi"
 safe_link "$PWD/xdg-desktop-portal" "$HOME/.config/xdg-desktop-portal"
-safe_link "$PWD/vscode-custom.css" "$HOME/.config/vscode-custom.css"
 
 # zshrc is a single file in the repo
 safe_link "$PWD/zsh/.zshrc" "$HOME/.zshrc"

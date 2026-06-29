@@ -10,7 +10,7 @@ timestr=%H:%M
 indicator
 indicator-radius=100
 indicator-thickness=10
-font=sans-serif
+font=JetBrainsMono
 font-size=24
 
 # Colors - using aa0000 (dark red) to match your idle config
